@@ -19,14 +19,14 @@ Design Pattern Details:
 	
 	Why Template?	Means of customizing the specific alogirthms within the Adaptor.
 	
-	Why Factory?	Universal configuration/constants object. This provides a wrapper
-			around each individual library's configuration/necessary
-			constants. Therefore, we can manage the configuration of our
-			universal adaptor from a single object as opposed to implementing
-			each individual configuration within the specific adaptors and
-			later editing each adaptor's configuration when a change is
-			required. This provides us a means to keep our specific
-			configurations within a single object.
+	Why Factory?	Universal methods/configuration/constants object. This provides
+			a wrapper around each individual library's specific method,
+			configuration, and necessary constants. Therefore, we can manage
+			the configuration of our universal adaptor from a single object as
+			opposed to implementing each individual method/configuration within
+			the specific adaptors and later editing each adaptor's configuration
+			when a change is required. This provides us a means to keep our
+			required methods/configurations within a single object.
 
 Why Multiple Handlers:
 	Some times you need to work with simple image manipulation, and
