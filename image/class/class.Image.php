@@ -31,7 +31,7 @@ class Image
 		}
 		
 		$this->filename = $filename;
-		$this->setHandler("GD");
+		$this->setHandler($image_handler);
 	}
 		
 	/**
