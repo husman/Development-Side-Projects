@@ -7,7 +7,7 @@ Example Usage Code:	index.php (directory relative to this file)
 
 Purpose of this branch:
 	creation of a universal php image handler. A generic adaptor is
-	created for use for image manipulation through: GD Library,
+	created for use with image manipulation through: GD Library,
 	ImageMagick, and Custom JPEG handler (Simple decoder only).
 
 Design Patterns Utilized:
@@ -48,7 +48,7 @@ Why I Implemented a very simple JPEG Decoder:
 	image handlers to the class!
 	
 Did I perform any optimizations?
-	It is much to early to profile the class and optimize for
+	It is much too early to profile the class and optimize for
 	performance. Normalization of the codes and proper phpdocs have
 	not been fully implemented yet too. However, The proper comments
 	will be implemented and phpdocumentor2 will be used to create
