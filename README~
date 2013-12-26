@@ -4,11 +4,3 @@ This is a demostration I have wrote up for David @ Next Source. The back-end is 
 
 I like to separate the layers of my application as much as possible and break the components of my application/software into front-end and back-end components. The front-end (HTML, JavaScript, and CSS) has follows the same Design Pattern as the back-end (PHP). The front-end achieves MVC through the help of AngularJS. Though I have not done anythng with the front-end data to persist it with the back-end for this demostration.
 
-EXAMPLES:
----------
-
-1: (Utilization of custom back-end MVC framework): http://192.168.1.36:7000/index.php
-
-2: (back-end/Front-end MVC framework Utilization): http://192.168.1.36:7000/index.php?controller=assessment&action=add
-
-3: Example Index: http://192.168.1.36:7000/
