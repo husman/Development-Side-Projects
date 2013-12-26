@@ -7,8 +7,8 @@ I like to separate the layers of my application as much as possible and break th
 EXAMPLES:
 ---------
 
-1: (Utilization of custom back-end MVC framework): http://192.168.1.36:7000/index.php
+1: (Utilization of custom back-end MVC framework): http://67.85.187.246:7000/index.php
 
-2: (back-end/Front-end MVC framework Utilization): http://192.168.1.36:7000/index.php?controller=assessment&action=add
+2: (back-end/Front-end MVC framework Utilization): http://67.85.187.246:7000/index.php?controller=assessment&action=add
 
-3: Example Index: http://192.168.1.36:7000/
+3: Example Index: http://67.85.187.246:7000/
