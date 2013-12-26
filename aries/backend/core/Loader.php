@@ -2,9 +2,9 @@
 /**
  * Aries
  * 
- * Some of these of these functions come from Codeigniter. However,
+ * Some of these functions come from Codeigniter. However,
  * they have been modified to suit this custom framework's needs.
- * Mose of the modifications are related to the database, since
+ * Most of the modifications are related to the database, since
  * custom database classes were written.
  *
  * @package		Aries
