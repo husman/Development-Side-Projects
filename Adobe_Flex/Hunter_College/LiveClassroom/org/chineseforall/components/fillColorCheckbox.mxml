@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" width="24" height="24">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.core.Application;
+			import mx.core.FlexGlobals;
+			[Bindable] private var app:Object = FlexGlobals.topLevelApplication;
+		]]>
+	</fx:Script>
+	
+	<mx:ColorPicker id="color" x="2" y="2"
+					selectedColor="{app.toolFillColor}"
+					valueCommit="app.toolFillColor = color.selectedColor;"
+					focusAlpha="0.0"></mx:ColorPicker>
+	<s:CheckBox x="-3" y="-3" alpha="0.95" id="state"
+				change="app.bolFillColorEnabled = state.selected;"
+				selected="{app.bolFillColorEnabled}"></s:CheckBox>
+	
+</s:SkinnableContainer>

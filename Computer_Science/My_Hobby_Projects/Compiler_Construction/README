@@ -1,0 +1,5 @@
+This is the beginning stages of a programming language I am writing
+called Unic. Unic stands for "Universal-C". I would like to merge 
+the C programming language with Java in a convention similar to 
+how you write web applications in HTML. You can insert JavaScript
+between the <Script> tag and CSS between the <STYLE> tag.

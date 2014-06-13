@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+					  xmlns:s="library://ns.adobe.com/flex/spark"
+					  xmlns:mx="library://ns.adobe.com/flex/mx"
+					  width="269" height="260" backgroundAlpha="1.0" backgroundColor="#EEEEEE"
+					  chromeColor="#F5F5F5" skinClass="org.chineseforall.skins.DropShadowBorderSkin"
+					  symbolColor="#777777">
+	<s:layout>
+		<s:TileLayout columnWidth="269" horizontalAlign="center" horizontalGap="0"
+					  requestedColumnCount="1" requestedRowCount="1" rowHeight="260"
+					  verticalAlign="middle" verticalGap="0"/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.core.Application;
+			import mx.core.FlexGlobals;
+			[Bindable] private var liveclassroom:Object = FlexGlobals.topLevelApplication;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer width="266" height="260" backgroundAlpha="1.0" backgroundColor="#F4F4F4"
+					   borderAlpha="0.9" borderColor="#FFFFFF" borderWeight="2" cornerRadius="6"
+					   dropShadowVisible="false">
+		<s:layout>
+			<s:VerticalLayout horizontalAlign="center"/>
+		</s:layout>
+		<s:Group x="96" y="53" width="241" height="100%">
+			<s:HGroup width="100%" gap="6" paddingTop="8" textAlign="left" verticalAlign="middle">
+				<s:Label width="100%" color="#444444" fontFamily="HelveticaNeueLTStd-Bd"
+						 fontLookup="embeddedCFF" fontSize="12" paddingLeft="34" text="Login"
+						 textAlign="center"/>
+				<s:BorderContainer id="lgn_btn_close" width="18" height="18"
+								   backgroundColor="#F4F4F4" borderColor="#F2F2F2" cornerRadius="6"
+								   dropShadowVisible="false" styleName="toolBorder" useHandCursor="true" buttonMode="true">
+					<s:layout>
+						<s:TileLayout columnWidth="18" horizontalAlign="center" horizontalGap="0"
+									  rowHeight="18" verticalAlign="middle" verticalGap="0"/>
+					</s:layout>
+					<s:Label color="#939393" fontSize="10" fontWeight="bold"
+							 text="X"/>
+				</s:BorderContainer>
+			</s:HGroup>
+			
+			<s:VGroup id="ms_tab_audio" width="100%" height="56%" y="35">
+			<s:HGroup width="100%" gap="2" paddingTop="10" verticalAlign="middle">
+				<s:Label color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+						 fontLookup="embeddedCFF" fontSize="12" text="Username" width="100%"/>
+			</s:HGroup>
+			<s:HGroup width="100%" gap="4">
+			</s:HGroup>
+				<s:TextInput id="lgn_username" width="100%"/>
+				<s:HGroup width="100%" gap="2" paddingTop="8" verticalAlign="middle">
+					<s:Label color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+							 fontLookup="embeddedCFF" fontSize="12" text="First name" width="100%"/>
+				</s:HGroup>
+				<s:TextInput id="lgn_firstname" width="100%"/>
+			<s:HGroup width="100%" gap="2" paddingTop="8" verticalAlign="middle">
+				<s:Label color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+						 fontLookup="embeddedCFF" fontSize="12" text="Last name"/>
+			</s:HGroup>
+				<s:TextInput id="lgn_lastname" width="100%"/>
+			<s:HGroup width="100%" gap="6" verticalAlign="middle">
+			</s:HGroup>
+			</s:VGroup>
+			
+
+			<s:HGroup width="100%" gap="10" horizontalAlign="left" y="220"
+					  verticalAlign="middle">
+				<mx:ColorPicker id="lgn_color"/>
+				
+				<s:Label color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+						 fontLookup="embeddedCFF" fontSize="12" text="Your color" width="100%"/>
+				
+				<s:Image id="lgn_btn_submit" source="assets/images/tools/options/btn_submit.png"
+						 useHandCursor="true" buttonMode="true"/>
+				</s:HGroup>
+		</s:Group>
+		
+	</s:BorderContainer>
+	
+</s:SkinnableContainer>

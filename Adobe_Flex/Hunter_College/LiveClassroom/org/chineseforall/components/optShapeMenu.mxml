@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+					  xmlns:s="library://ns.adobe.com/flex/spark"
+					  xmlns:mx="library://ns.adobe.com/flex/mx"
+					  width="269" height="306" backgroundAlpha="1.0" backgroundColor="#EEEEEE"
+					  chromeColor="#F5F5F5" skinClass="org.chineseforall.skins.DropShadowBorderSkin"
+					  symbolColor="#777777" xmlns:components="org.chineseforall.components.*">
+	<s:layout>
+		<s:TileLayout columnWidth="269" horizontalAlign="center" horizontalGap="0"
+					  requestedColumnCount="1" requestedRowCount="1" rowHeight="306"
+					  verticalAlign="middle" verticalGap="0"/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer width="266" height="303" backgroundAlpha="1.0" backgroundColor="#F4F4F4"
+					   borderAlpha="0.9" borderColor="#FFFFFF" borderWeight="2" cornerRadius="6"
+					   dropShadowVisible="false">
+		<s:layout>
+			<s:TileLayout columnWidth="266" horizontalAlign="center" rowHeight="303"
+						  verticalAlign="middle"/>
+		</s:layout>
+	<s:VGroup x="96" y="53" width="241" height="293" gap="6" horizontalAlign="center">
+		<s:HGroup width="100%" gap="6" paddingTop="8" textAlign="left" verticalAlign="middle">
+			<s:Label width="100%" color="#444444" fontFamily="HelveticaNeueLTStd-Bd"
+					 fontLookup="embeddedCFF" fontSize="12" paddingLeft="34" text="SHAPES OPTIONS"
+					 textAlign="center"/>
+			<s:BorderContainer id="tool_shapes_opt_close" width="18" height="18"
+							   backgroundColor="#F4F4F4" borderColor="#F2F2F2" cornerRadius="6"
+							   dropShadowVisible="false" styleName="toolBorder" useHandCursor="true" buttonMode="true">
+				<s:layout>
+					<s:TileLayout columnWidth="18" horizontalAlign="center" horizontalGap="0"
+								  rowHeight="18" verticalAlign="middle" verticalGap="0"/>
+				</s:layout>
+				<s:Label color="#939393" fontSize="10" fontWeight="bold" text="X"/>
+			</s:BorderContainer>
+		</s:HGroup>
+		<s:HGroup width="100%" gap="3" verticalAlign="middle">
+			<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+					 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Shape"/>
+			<s:HGroup y="7" width="100%" gap="4">
+				<s:BorderContainer id="tool_shapes_opt_shape_ellipse" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorderActive">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+					<s:Image smooth="false" smoothingQuality="high"
+							 source="@Embed('assets/images/tools/selections/sel_shapeEllipse.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_shape_rectangle" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/selections/sel_shapeRectangle.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_shape_triangle" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/selections/sel_shapeTriangle.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_shape_line" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/selections/sel_shapeLine.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_shape_arrow" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/selections/sel_shapeArrow.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_shape_bubble" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/selections/sel_shapeBubble.png')"/>
+				</s:BorderContainer>
+			</s:HGroup>
+		</s:HGroup>
+		<mx:HRule width="100%" height="1" alpha="0.4"/>
+		<s:HGroup width="100%" gap="3" verticalAlign="middle">
+			<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+					 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Line Style"/>
+			<s:HGroup y="7" width="100%" gap="4">
+				<s:BorderContainer id="tool_shapes_opt_linestyle_solid" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorderActive">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+					<s:Image smooth="false" smoothingQuality="high"
+							 source="@Embed('assets/images/tools/options/option_lineStyleSolid.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_linestyle_dashed" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/options/option_lineStyleDashed.png')"/>
+				</s:BorderContainer>
+			</s:HGroup>
+		</s:HGroup>
+		<mx:HRule width="100%" height="1" alpha="0.4"/>
+		<s:HGroup width="100%" gap="3" verticalAlign="middle">
+			<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+					 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Line Width"/>
+			<s:HGroup y="7" width="100%" gap="4">
+				<s:BorderContainer id="tool_shapes_opt_linewidth_1" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorderActive">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+					<s:Image smooth="false" smoothingQuality="high"
+							 source="@Embed('assets/images/tools/options/option_lineWidth1.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_linewidth_2" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/options/option_lineWidth2.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_linewidth_3" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/options/option_lineWidth3.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_linewidth_4" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/options/option_lineWidth4.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_linewidth_5" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/options/option_lineWidth5.png')"/>
+				</s:BorderContainer>
+			</s:HGroup>
+		</s:HGroup>
+		<mx:HRule width="100%" height="1" alpha="0.4"/>
+		<s:HGroup width="100%" gap="3" verticalAlign="middle">
+			<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+					 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Arrowhead"/>
+			<s:HGroup id="tool_shapes_opt_arrowhead" y="7" width="100%" gap="4" enabled="false">
+				<s:BorderContainer id="tool_shapes_opt_arrowhead_none" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorderActive">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+					<s:Image smooth="false" smoothingQuality="high"
+							 source="@Embed('assets/images/tools/options/option_arrowHeadNone.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_arrowhead_left" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/options/option_arrowHeadLeft.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_arrowhead_right" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/options/option_arrowHeadRight.png')"/>
+				</s:BorderContainer>
+			</s:HGroup>
+		</s:HGroup>
+		<mx:HRule width="100%" height="1" alpha="0.4"/>
+		<s:HGroup width="100%" gap="3" verticalAlign="middle">
+			<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+					 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Bubbles"/>
+			<s:HGroup id="tool_shapes_opt_bubble" y="7" width="100%" gap="4" enabled="false">
+				<s:BorderContainer id="tool_shapes_opt_bubble_ellipse" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorderActive">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+					<s:Image smooth="false" smoothingQuality="high"
+							 source="@Embed('assets/images/tools/options/option_bubbleEllipse.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_bubble_square" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/options/option_bubbleRectangle.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer id="tool_shapes_opt_bubble_circle" width="26" height="26"
+								   dropShadowVisible="false" styleName="toolBorder">
+					<s:layout>
+						<s:TileLayout columnWidth="26" horizontalAlign="center" rowHeight="26"
+									  verticalAlign="middle"/>
+					</s:layout>
+				<s:Image smooth="false" smoothingQuality="high"
+						 source="@Embed('assets/images/tools/options/option_bubbleCircle.png')"/>
+				</s:BorderContainer>
+			</s:HGroup>
+		</s:HGroup>
+		<mx:HRule width="100%" height="1" alpha="0.4"/>
+		<s:HGroup width="100%" gap="3" verticalAlign="middle">
+			<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+					 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Fill Color"/>
+			
+			<components:fillColorCheckbox></components:fillColorCheckbox>
+			<s:Label width="80" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+					 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Line Color"
+					 textAlign="center" verticalAlign="middle"/>
+			<components:lineColorCheckbox></components:lineColorCheckbox>
+			
+		</s:HGroup>
+		<s:HGroup width="100%" gap="10" horizontalAlign="right" paddingTop="5"
+				  verticalAlign="middle">
+			<s:Image id="tool_shapes_opt_submit" source="assets/images/tools/options/btn_submit.png"
+					 useHandCursor="true" buttonMode="true"/>
+		</s:HGroup>
+	</s:VGroup>
+	</s:BorderContainer>
+	
+</s:SkinnableContainer>

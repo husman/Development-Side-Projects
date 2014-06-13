@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+					  xmlns:s="library://ns.adobe.com/flex/spark"
+					  xmlns:mx="library://ns.adobe.com/flex/mx"
+					  width="550" height="294" backgroundAlpha="1.0" backgroundColor="#EEEEEE"
+					  chromeColor="#F5F5F5" contentBackgroundAlpha="1.0"
+					  skinClass="org.chineseforall.skins.DropShadowBorderSkin" symbolColor="#777777">
+	<s:layout>
+		<s:TileLayout columnWidth="550" horizontalAlign="center" horizontalGap="0"
+					  requestedColumnCount="1" requestedRowCount="1" rowHeight="294"
+					  verticalAlign="middle" verticalGap="0"/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			import mx.controls.Alert;
+			import mx.core.Application;
+			import mx.core.FlexGlobals;
+			[Bindable] private var liveclassroom:Object = FlexGlobals.topLevelApplication;
+			
+			[Bindable] public var fileArrayList:ArrayList = liveclassroom.fileArrayList;
+			
+			private function display_tab(tab:String):void
+			{
+				if(tab == "audio") {
+					ms_btn_audio.alpha = 1.0;
+					ms_btn_video.alpha = 0.5;
+					ms_tab_video.visible = false;
+					ms_tab_audio.visible = true;
+					
+				} else {
+					ms_btn_audio.alpha = 0.5;
+					ms_btn_video.alpha = 1.0;
+					ms_tab_audio.visible = false;
+					ms_tab_video.visible = true;
+				}
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer width="547" height="293" backgroundAlpha="1.0" backgroundColor="#F4F4F4"
+					   borderAlpha="1.0" borderColor="#FFFFFF" borderWeight="2" cornerRadius="6"
+					   dropShadowVisible="false">
+		<s:layout>
+			<s:TileLayout columnWidth="547" horizontalAlign="center" rowHeight="293"
+						  verticalAlign="middle"/>
+		</s:layout>
+		<s:Group x="96" y="53" width="530" height="100%">
+			<s:HGroup width="100%" gap="6" paddingTop="12" textAlign="left" verticalAlign="middle">
+				<s:Label width="100%" color="#444444" fontFamily="HelveticaNeueLTStd-Bd"
+						 fontLookup="embeddedCFF" fontSize="12" paddingLeft="34" text="FILE MANAGEMENT"
+						 textAlign="center"/>
+				<s:BorderContainer id="ms_btn_close" width="18" height="18"
+								   backgroundColor="#F4F4F4" borderColor="#F5F5F5" cornerRadius="6"
+								   dropShadowVisible="false" styleName="toolBorder" useHandCursor="true" buttonMode="true">
+					<s:layout>
+						<s:TileLayout columnWidth="18" horizontalAlign="center" horizontalGap="0"
+									  rowHeight="18" verticalAlign="middle" verticalGap="0"/>
+					</s:layout>
+					<s:Label color="#939393" fontSize="10" fontWeight="bold" text="X"/>
+				</s:BorderContainer>
+			</s:HGroup>
+			<s:HGroup width="100%" y="40" verticalAlign="middle">
+				<s:Image id="ms_btn_audio"
+						 source="assets/images/buttons/files_tab.png"/>
+				<s:Image id="ms_btn_video" alpha="0.5"
+						 source="assets/images/buttons/downloads_tab.png"/>
+				<s:Image id="ms_btn_video0" alpha="0.5"
+						 source="assets/images/buttons/upload_tab.png"/>
+			</s:HGroup>
+			
+			<s:VGroup id="ms_tab_audio" width="100%" height="215" y="65">
+				<s:BorderContainer width="100%" height="100%" backgroundAlpha="0.8" borderAlpha="1.0"
+								   borderColor="#999999" contentBackgroundAlpha="0.7"
+								   cornerRadius="0">
+					<s:layout>
+						<s:VerticalLayout horizontalAlign="center" paddingBottom="8" paddingLeft="4"
+										  paddingRight="4" paddingTop="8"/>
+					</s:layout>
+					<s:HGroup gap="6" paddingLeft="8" paddingRight="2" bottom="5" paddingTop="4"
+							  verticalAlign="middle" width="100%">
+						<!--<s:BitmapImage id="star" source="{data.icon}" visible="true" />-->
+						<s:Label text="File Name" maxDisplayedLines="1" width="210"  fontSize="12"
+								 color="#474747" fontWeight="bold"/>
+						<s:Label text="Size" maxDisplayedLines="1" fontSize="12" fontWeight="bold"
+								 width="75" textAlign="center" color="#474747"/>
+						<s:Label text="Upload Date" maxDisplayedLines="1" fontSize="12" fontWeight="bold"
+								 width="115" textAlign="center" color="#474747"/>
+						
+					</s:HGroup>
+				<s:List id="room_list" width="100%" height="100%"
+						borderVisible="false" color="#335DDE" dataProvider="{fileArrayList}"
+						textAlign="left" itemRenderer="org.chineseforall.itemRenders.fileManagementIR"
+						fontSize="12">
+					<s:layout>
+						<s:VerticalLayout gap="1" paddingBottom="5" paddingLeft="5"
+										  paddingRight="5" paddingTop="5"/>
+					</s:layout>
+				</s:List>
+				</s:BorderContainer>
+			</s:VGroup>
+			
+			<s:VGroup id="ms_tab_video" visible="false" width="100%" height="56%" y="65">
+				<s:HGroup width="100%" gap="2" paddingTop="10" verticalAlign="middle">
+					<s:Label color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+							 fontLookup="embeddedCFF" fontSize="12" text="Selected Webcam" width="100%"/>
+					<s:CheckBox color="#444444" fontFamily="HelveticaNeueLTStd-Roman" id="ms_camState"
+								fontLookup="embeddedCFF" fontSize="12" label="Enabled" selected="true"/>
+				</s:HGroup>
+				<s:HGroup width="100%" gap="4">
+					<s:DropDownList id="ms_camList" width="100%" selectedIndex="0"
+									skinClass="org.chineseforall.skins.DropdownListBox">
+						<mx:ArrayCollection>
+							<fx:String>Webcam #1</fx:String>
+							<fx:String>Webcam #2</fx:String>
+							<fx:String>Webcam #3</fx:String>
+						</mx:ArrayCollection>
+					</s:DropDownList>
+				</s:HGroup>
+				<s:HGroup width="100%" gap="2" paddingTop="10" verticalAlign="middle">
+					<s:Label color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+							 fontLookup="embeddedCFF" fontSize="12" text="Webcam frames per second" width="100%"/>
+				</s:HGroup>
+				<s:HGroup width="100%" gap="4">
+					<s:DropDownList id="ms_camFPS" width="100%" selectedIndex="4"
+									skinClass="org.chineseforall.skins.DropdownListBox">
+						<mx:ArrayCollection>
+							<fx:String>5</fx:String>
+							<fx:String>10</fx:String>
+							<fx:String>15</fx:String>
+							<fx:String>20</fx:String>
+							<fx:String>25</fx:String>
+							<fx:String>30</fx:String>
+						</mx:ArrayCollection>
+					</s:DropDownList>
+				</s:HGroup>
+				<s:HGroup width="100%" gap="2" paddingTop="8" verticalAlign="middle">
+					<s:Label color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+							 fontLookup="embeddedCFF" fontSize="12" text="Video Quality"/>
+				</s:HGroup>
+				<s:HGroup width="100%" gap="6" verticalAlign="middle">
+					<s:Label id="ms_camQualityDown" color="#8fbc32" fontFamily="HelveticaNeueLTStd-Bd"
+							 fontLookup="embeddedCFF" fontSize="16" text="-" buttonMode="true" useHandCursor="true"/>
+					<s:HSlider id="ms_camQuality" width="100%" chromeColor="#FFFFFF" maximum="100"
+							   minimum="0.0" showDataTip="false"
+							   skinClass="org.chineseforall.skins.HSliderSkin" stepSize="1.0" value="50"/>
+					<s:Label id="ms_camQualityUp" color="#8fbc32" fontFamily="HelveticaNeueLTStd-Bd"
+							 fontLookup="embeddedCFF" fontSize="16" text="+" buttonMode="true" useHandCursor="true"/>
+				</s:HGroup>
+			</s:VGroup>
+		</s:Group>
+		
+	</s:BorderContainer>
+	
+</s:SkinnableContainer>

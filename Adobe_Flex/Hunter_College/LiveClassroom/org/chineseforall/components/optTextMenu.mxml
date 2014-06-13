@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+					  xmlns:s="library://ns.adobe.com/flex/spark"
+					  xmlns:mx="library://ns.adobe.com/flex/mx"
+					  width="269" height="228" backgroundAlpha="1.0" backgroundColor="#EEEEEE"
+					  chromeColor="#F5F5F5" skinClass="org.chineseforall.skins.DropShadowBorderSkin"
+					  symbolColor="#777777">
+	<s:layout>
+		<s:TileLayout columnWidth="269" horizontalAlign="center" horizontalGap="0"
+					  requestedColumnCount="1" requestedRowCount="1" rowHeight="228"
+					  verticalAlign="middle" verticalGap="0"/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.core.Application;
+			import mx.core.FlexGlobals;
+			[Bindable] private var app:Object = FlexGlobals.topLevelApplication;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer width="266" height="303" backgroundAlpha="1.0" backgroundColor="#F4F4F4"
+					   borderAlpha="0.9" borderColor="#FFFFFF" borderWeight="2" cornerRadius="6"
+					   dropShadowVisible="false">
+		<s:layout>
+			<s:TileLayout columnWidth="266" horizontalAlign="center" rowHeight="303"
+						  verticalAlign="middle"/>
+		</s:layout>
+		<s:VGroup x="96" y="53" width="241" height="293" gap="6" horizontalAlign="center">
+			<s:HGroup width="100%" gap="6" paddingTop="8" textAlign="left"
+					  verticalAlign="middle" paddingBottom="8">
+				<s:Label width="100%" color="#444444" fontFamily="HelveticaNeueLTStd-Bd"
+						 fontLookup="embeddedCFF" fontSize="12" paddingLeft="34" text="TEXT OPTIONS"
+						 textAlign="center"/>
+				<s:BorderContainer id="tool_text_opt_close" width="18" height="18"
+								   backgroundColor="#F4F4F4" borderColor="#F2F2F2" cornerRadius="6"
+								   dropShadowVisible="false" styleName="toolBorder" useHandCursor="true" buttonMode="true">
+					<s:layout>
+						<s:TileLayout columnWidth="18" horizontalAlign="center" horizontalGap="0"
+									  rowHeight="18" verticalAlign="middle" verticalGap="0"/>
+					</s:layout>
+					<s:Label color="#939393" fontSize="10" fontWeight="bold" text="X"/>
+				</s:BorderContainer>
+			</s:HGroup>
+			<s:HGroup width="100%" gap="3" verticalAlign="middle">
+				<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+						 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Font"/>
+				<s:HGroup y="7" width="100%" gap="4">
+					<s:DropDownList id="tool_text_opt_font" width="100%" selectedIndex="0"
+									skinClass="org.chineseforall.skins.DropdownListBox">
+						<mx:ArrayCollection>
+							<fx:String>Helvetica Neue LT</fx:String>
+							<fx:String>Times New Roman</fx:String>
+							<fx:String>Comic Sans MS</fx:String>
+							<fx:String>Verdana</fx:String>
+							<fx:String>Arial</fx:String>
+						</mx:ArrayCollection>
+					</s:DropDownList>
+				</s:HGroup>
+			</s:HGroup>
+			<mx:HRule width="100%" height="1" alpha="0.4"/>
+			<s:HGroup width="100%" gap="3" verticalAlign="middle">
+				<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+						 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Font Style"/>
+				<s:HGroup y="7" width="100%" gap="4">
+					<s:DropDownList id="tool_text_opt_fontStyle" width="100%" selectedIndex="0"
+									skinClass="org.chineseforall.skins.DropdownListBox">
+						<mx:ArrayCollection>
+							<fx:String>Normal</fx:String>
+							<fx:String>Bold</fx:String>
+							<fx:String>Italic</fx:String>
+						</mx:ArrayCollection>
+					</s:DropDownList>
+				</s:HGroup>
+			</s:HGroup>
+			<mx:HRule width="100%" height="1" alpha="0.4"/>
+			<s:HGroup width="100%" gap="3" verticalAlign="middle">
+				<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+						 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Font Size"/>
+				<s:HGroup y="7" width="100%" gap="4">
+					<s:DropDownList id="tool_text_opt_fontSize" width="100%" selectedIndex="4"
+									skinClass="org.chineseforall.skins.DropdownListBox">
+						<mx:ArrayCollection>
+							<fx:String>8</fx:String>
+							<fx:String>9</fx:String>
+							<fx:String>10</fx:String>
+							<fx:String>11</fx:String>
+							<fx:String>12</fx:String>
+							<fx:String>14</fx:String>
+							<fx:String>16</fx:String>
+							<fx:String>18</fx:String>
+							<fx:String>20</fx:String>
+							<fx:String>22</fx:String>
+							<fx:String>24</fx:String>
+							<fx:String>26</fx:String>
+							<fx:String>28</fx:String>
+							<fx:String>30</fx:String>
+							<fx:String>32</fx:String>
+							<fx:String>34</fx:String>
+							<fx:String>36</fx:String>
+						</mx:ArrayCollection>
+					</s:DropDownList>
+				</s:HGroup>
+			</s:HGroup>
+			<mx:HRule width="100%" height="1" alpha="0.4"/>
+			<s:HGroup width="100%" gap="3" verticalAlign="middle">
+				<s:Label width="60" color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+						 fontLookup="embeddedCFF" fontSize="12" fontWeight="normal" text="Color"/>
+				<mx:ColorPicker id="tool_text_opt_fillColor" chromeColor="#FFFFFF"
+								selectedColor="{app.toolFillColor}"
+								valueCommit="app.toolFillColor = tool_text_opt_fillColor.selectedColor;"/>
+			</s:HGroup>
+			<s:HGroup width="100%" gap="10" horizontalAlign="right" paddingTop="5"
+					  verticalAlign="middle">
+				<s:Image id="tool_text_opt_submit" source="assets/images/tools/options/btn_submit.png"
+						 useHandCursor="true" buttonMode="true"/>
+			</s:HGroup>
+		</s:VGroup>
+	</s:BorderContainer>
+	
+</s:SkinnableContainer>

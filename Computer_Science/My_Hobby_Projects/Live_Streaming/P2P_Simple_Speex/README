@@ -1,0 +1,15 @@
+Experimental program: rtp_wave_client.c:
+	I wrote a small Wave decoder (see my Wave project) which decodes a selected wave file.
+	The wave file is streamed via RTP using the oRTP library to a server. The RTP is over UDP.
+
+Experimental program: rtp_wave_speex_client.c:
+	You can select a wave file and it will be decoded and encoded into speex then sent 
+	over to a server.
+
+Experimental program: rtp_wave_speex_server.c:
+	Experimental server for the rtp_wave_speex_client.
+
+Experimental program: rtp_flv_client.c:
+	Most of my live streaming professional work was done with Adobe Flex/Flash Media Server.
+	The FLV format interest me as a result. This is an experimental program to stream FLV
+	files with Speex audio.

@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:components="org.chineseforall.components.*"
+			   xmlns:ns1="*"
+			   width="100%" height="100%" backgroundColor="#E1E1E1"
+			   creationComplete="init();"
+			   deactivate="handleAppLostFocus();"
+			   activate="gotFocusBack();" applicationComplete="setupKeyBoardEvents();">
+	<fx:Style source="org/chineseforall/css/core.css"/>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.effects.Fade;
+			import mx.events.DragEvent;
+			
+			import org.chineseforall.components.PDFNav;
+			import org.chineseforall.components.idleNotice;
+			import org.chineseforall.core.App;
+			import org.chineseforall.core.NoticeBar;
+			import org.chineseforall.core.PDFBox;
+			import org.chineseforall.core.Settings;
+			import org.chineseforall.core.Whiteboard;
+			
+			import spark.components.CheckBox;
+			import spark.primitives.Rect;
+			import spark.primitives.supportClasses.FilledElement;
+			
+			[Bindable] public var toolColors:Object = {
+				fillColor : 13311,
+				lineColor: 0,
+				fillEnabled : true,
+				lineEnabled : true
+			};
+			[Bindable] public var toolFillColor:uint = 13311;
+			[Bindable] public var toolLineColor:uint = 0;
+			[Bindable] public var bolFillColorEnabled:Boolean = true;
+			[Bindable] public var bolLineColorEnabled:Boolean = true;
+			[Bindable] public var micEnabled:Boolean = false;
+			[Bindable] public var holdCtrlToSpeak:Boolean = true;
+			[Bindable] public var camEnabled:Boolean = false;
+			
+			import flashx.textLayout.conversion.*;
+			import flashx.textLayout.elements.*;
+			import flashx.textLayout.elements.Configuration;
+			import flashx.textLayout.events.CompositionCompleteEvent;
+			import flashx.textLayout.events.UpdateCompleteEvent;
+			import flashx.textLayout.formats.TextDecoration;
+			import flashx.textLayout.formats.TextLayoutFormat;
+			
+			import mx.collections.*;
+			import mx.controls.Alert;
+			import mx.core.IUIComponent;
+			import mx.core.UIComponent;
+			import mx.effects.easing.*;
+			import mx.managers.CursorManager;
+			import mx.utils.*;
+			import mx.utils.ObjectUtil;
+			import mx.utils.object_proxy;
+			import spark.utils.TextFlowUtil;
+			
+			public static var app:App = null;
+			
+			public const MY_USERNAME:String = "Haleeq Usman";
+			public const MY_FIRSTNAME:String = Math.random().toString();
+			public const MY_LASTNAME:String = Math.random().toString();
+			
+			[Bindable] public var roomListArray:ArrayList;
+			[Bindable] private var fileListArray:ArrayList;
+			[Bindable] private var cfg:Configuration = TextFlow.defaultConfiguration;
+			
+			public var idle:idleNotice = null;
+			
+			private function handleKeyDown(e:KeyboardEvent):void
+			{
+				if(e.keyCode == Keyboard.CONTROL) {
+					app.settings.toggleMic(true);
+				}
+			}
+			
+			private function handleKeyUp(e:KeyboardEvent):void
+			{
+				if(e.keyCode == Keyboard.CONTROL) {
+					app.settings.toggleMic(false);
+				}
+			}
+			
+			private function setupKeyBoardEvents():void
+			{
+				stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
+				stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyUp);
+			}
+			
+			private function handleAppLostFocus():void
+			{
+				if (ExternalInterface.available) {
+					if(idle == null) {
+						idle = new idleNotice();
+						idle.width = canvas.width - 8;
+						idle.x = 3;
+						idle.y = 3;
+						idle.alpha = 0.9;
+					}
+					body.addElement(idle);
+					idle.visible = true;
+					txt_chatBox.text = "In idle mode.";
+					ExternalInterface.call("sayHelloWorld");
+				}
+			}
+			
+			private function gotFocusBack():void
+			{
+				if(idle != null)
+					body.removeElement(idle);
+				txt_chatBox.text = "In active mode";
+			}
+			
+			
+			/*
+			private var chatText:String = 
+			'<font color="#d11f5a">Husman2:</font><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /><br />' +
+			'<font color="#35a616">Chao:</font><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /><br />' +
+			'<font color="#ffaa16">Bing Ying:</font><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /><br />' +
+			'<font color="#d11f5a">Husman:</font><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /><br />' +
+			'<font color="#d11f5a">Husman:</font><br />Lorem <a href="http://google.com" target="_blank">google.com</a>.<br /><br />';
+			*/
+			
+			
+			private function setupApplicationStyles():void {
+				
+				var normalFmt:TextLayoutFormat = new TextLayoutFormat(cfg.defaultLinkNormalFormat);
+				normalFmt.color = 0xFF0000; // red
+				normalFmt.textDecoration = TextDecoration.NONE;
+				
+				var hoverFmt:TextLayoutFormat = new TextLayoutFormat(cfg.defaultLinkHoverFormat);
+				hoverFmt.color = 0xFF00FF; // purple
+				hoverFmt.textDecoration = TextDecoration.UNDERLINE;
+				
+				cfg.defaultLinkNormalFormat = normalFmt;
+				cfg.defaultLinkHoverFormat = hoverFmt;
+				
+			}
+			
+			public function setupRoomList():void
+			{
+				/*roomListArray=new ArrayList(
+					[
+						{ username: "husman", firstname: "Haleeq", lastname: "Usman", color: "#7090E9", icon: "assets/images/bullet_points/eicon.gif" },
+						{ username: "chao", firstname: "Derlin", lastname: "Chao", color: "#7090E9", icon: "assets/images/bullet_points/bficon.png" },
+						{ username: "watashiwa_BYH", firstname: "Bing Ying", lastname: "Hu", color: "#7090E9", icon: "assets/images/bullet_points/bicon.gif" }
+					]);*/
+				
+				fileListArray=new ArrayList(
+					[
+						{ label: "Introducing.HTML5.pdf", size: "20kB", date: "7/20/12", color: "#7090E9", data: "assets/swfs/108.swf" },
+						{ label: "Information_Theory.pdf", size: "184kB", date: "7/22/12", color: "#7090E9", data: "assets/swfs/info1.swf"}
+					]);
+			}
+			
+			
+			private var textFlow:TextFlow = new TextFlow();
+			
+			private function sendText():void
+			{
+				if(StringUtil.trim(chat_txt.text) !== "" && app.settings.firstname != null && app.settings.lastname != null)
+				{
+					var paragraph:ParagraphElement = new ParagraphElement(),
+						username:SpanElement = new SpanElement(),
+						message:SpanElement = new SpanElement();
+					
+					username.color = "#d11f5a";
+					username.fontFamily = "HelveticaNeueLTStd-Bd";
+					username.text = app.settings.firstname + " " + app.settings.lastname + ":\n";
+					message.text = chat_txt.text + "\n" ;
+					
+					paragraph.addChild(username);
+					paragraph.addChild(message);
+					textFlow.addChild(paragraph);
+					
+					txt_chatBox.textFlow = textFlow;
+					txt_chatBox.textFlow.flowComposer.updateAllControllers();
+					
+					// Let's update the charbox scroller
+					chatBoxScroller.validateNow();
+					txt_chatBox.verticalScrollPosition = txt_chatBox.contentHeight - txt_chatBox.height;
+					// The textflow may not have completed its compisition so we must call this twice :(
+					chatBoxScroller.validateNow();
+					txt_chatBox.verticalScrollPosition = txt_chatBox.contentHeight - txt_chatBox.height;
+					
+					
+					
+					chat_txt.text = "";
+					txt_chatBox.selectAll();
+					
+					
+					//obj.startDrag();
+				}
+			}
+			
+			private function init():void {
+				roomListArray = new ArrayList();
+				app = new App(LiveClassroom(this));
+				setupApplicationStyles();
+				setupRoomList();
+				setupChatBox();
+				initPDF();
+				
+				//Net.initialize(app);
+				//Net.connect("rtmp://gamersdig.com/dev/1", MY_USERNAME, MY_FIRSTNAME, MY_LASTNAME);
+				
+			}
+			
+			private function setupChatBox():void
+			{
+				chat_txt.addEventListener(KeyboardEvent.KEY_UP,
+					function(e:KeyboardEvent):void {
+						if(e.keyCode == Keyboard.ENTER) {
+							sendText();
+						}
+					});
+			}
+			
+			private function beginConn():void
+			{
+				//app.net.connect("rtmp://chineseforall.org/liveclassroom/room1","husman","Haleeq","Usman");
+			}
+			
+			private var myLoader:Loader = new Loader();
+			private var sel_region:Rectangle;
+			private function addPDF():void
+			{
+				myLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, onProgressStatus);
+				myLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoaderReady);
+				
+				var fileRequest:URLRequest = new URLRequest("http://www.dotacash.com/_assets/img/logo.png");
+				myLoader.load(fileRequest);
+			}
+			
+			private function onProgressStatus(e:ProgressEvent):void {   
+				// this is where progress will be monitored     
+				trace(e.bytesLoaded, e.bytesTotal); 
+			}
+			
+			private function onLoaderReady(e:Event):void {     
+				// the image is now loaded, so let's add it to the display tree!     
+				myLoader.x = 2;
+				myLoader.y = 2;
+				app.whiteboard.boardBitmapData.draw(myLoader);
+			}
+			
+			private var pdf:PDFNav = null;
+			private function getPDF():void
+			{
+				var selected_item:String;
+				if(file_list.selectedItem == null)
+					selected_item = "assets/swfs/108.swf";
+				else
+					selected_item = file_list.selectedItem.data;
+				if(pdf == null) {
+					pdf = new PDFNav();
+					pdf.width = canvas.width - 9;
+					pdf.height = canvas.height - 50;
+					pdf.x = 4;
+					pdf.y = 3;
+					pdf.name = "pdf123";
+					pdf.initializeAndLoad(app, selected_item);
+					canvas.addChild(pdf);
+				} else {
+					pdf.cleanUp();
+					canvas.removeChild(pdf);
+					pdf = new PDFNav();
+					pdf.width = canvas.width - 9;
+					pdf.height = canvas.height - 50;
+					pdf.x = 4;
+					pdf.y = 3;
+					pdf.name = "pdf123";
+					pdf.initializeAndLoad(app, selected_item);
+					canvas.addChild(pdf);
+				}
+			}
+			
+			public function initPDF():void
+			{
+				// Let's setup the PDF server/shared functions
+				app.net.nc_client.PDF_syncExecuteCmd = function(client_id:String, cmd_obj:Object):void {
+					if(client_id != app.net.nc_client.id) {
+						var pdf:PDFNav = canvas.getChildByName(cmd_obj.name) as PDFNav;
+						if(pdf != null) {
+							if(pdf.shared_mode.selected)
+								pdf.executeCmd(cmd_obj);
+						}
+					}
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:VGroup x="0" y="0" width="100%" height="100%" contentBackgroundColor="#FFFFFF" gap="6"
+			  paddingBottom="6">
+		<s:SkinnableContainer id="top_panel" width="100%" height="46"
+							  skinClass="org.chineseforall.skins.TopPanelSkin" styleName="top_panel">
+			<s:layout>
+				<s:HorizontalLayout verticalAlign="middle"/>
+			</s:layout>
+			
+			<s:Image smooth="false" source="@Embed('assets/images/statics/logo.png')"/>
+			
+			<s:HGroup width="100%" gap="10" horizontalAlign="right" verticalAlign="middle">
+				<s:HGroup gap="2">
+					<s:Label color="#888888" fontFamily="HelveticaNeueLTStd" fontLookup="embeddedCFF"
+							 fontSize="13" paddingLeft="0" text="Logged in as"/>
+					<s:Label color="#60AD4B" fontFamily="HelveticaNeueLTStd" fontLookup="embeddedCFF"
+							 fontSize="13" paddingRight="0" text="usernameusername1"/>
+				</s:HGroup>
+				<s:Image id="btn_mediaSettings" smooth="false" source="@Embed('assets/images/buttons/audioVid_btn.png')"/>
+				<s:Image id="btn_logout" smooth="false" source="@Embed('assets/images/buttons/logout_btn.png')"/>
+			</s:HGroup>
+			
+		</s:SkinnableContainer>
+		<s:Group width="100%" height="100%" contentBackgroundColor="#FFFFFF">
+			<s:layout>
+				<s:HorizontalLayout gap="0"/>
+			</s:layout>
+			<s:SkinnableContainer width="53" height="100%">
+				<s:layout>
+					<s:VerticalLayout horizontalAlign="center"/>
+				</s:layout>
+				<s:BorderContainer x="4" y="0" width="40" height="180" backgroundColor="#FFFFFF"
+								   borderColor="#777777" dropShadowVisible="false">
+					<s:layout>
+						<s:VerticalLayout gap="8" horizontalAlign="center" paddingTop="8"/>
+					</s:layout>
+					<s:BorderContainer width="26" height="26" dropShadowVisible="false"
+									   id="tool_pointers" styleName="toolBorder">
+						<s:Image width="24" height="24" smooth="false" smoothingQuality="high"
+								 source="@Embed('assets/images/tools/tool_pointer.png')"/>
+					</s:BorderContainer>
+					<s:BorderContainer width="26" height="26" dropShadowVisible="false"
+									   id="tool_shapes" styleName="toolBorder">
+						<s:Image width="24" height="24" smooth="false" smoothingQuality="high"
+								 source="@Embed('assets/images/tools/tool_shape.png')"/>
+					</s:BorderContainer>
+					<s:BorderContainer id="tool_brushes" width="26" height="26"
+									   dropShadowVisible="false" styleName="toolBorder">
+						<s:Image width="24" height="24" smooth="false" smoothingQuality="high"
+								 source="@Embed('assets/images/tools/tool_brush.png')"/>
+					</s:BorderContainer>
+					<s:BorderContainer id="tool_zoom" width="26" height="26"
+									   dropShadowVisible="false" styleName="toolBorder">
+						<s:Image width="24" height="24" smooth="false" smoothingQuality="high"
+								 source="@Embed('assets/images/tools/tool_zoom.png')"/>
+					</s:BorderContainer>
+					<s:BorderContainer id="tool_deletes" width="26" height="26"
+									   dropShadowVisible="false" styleName="toolBorder">
+						<s:Image width="24" height="24" smooth="false" smoothingQuality="high"
+								 source="@Embed('assets/images/tools/tool_delete.png')"/>
+					</s:BorderContainer>
+				</s:BorderContainer>
+				<s:BorderContainer width="38" height="74" backgroundColor="#FFFFFF"
+								   borderColor="#777777" dropShadowVisible="false">
+					<s:layout>
+						<s:VerticalLayout gap="8" horizontalAlign="center" paddingTop="8"/>
+					</s:layout>
+					<s:BorderContainer id="tool_text" width="26" height="26"
+									   dropShadowVisible="false" styleName="toolBorder">
+						<s:Image width="24" height="24" smooth="false"
+								 smoothingQuality="high"
+								 source="@Embed('assets/images/tools/tool_text.png')"/>
+					</s:BorderContainer>
+					<s:BorderContainer id="tool_grids" width="26" height="26"
+									   dropShadowVisible="false" styleName="toolBorder">
+						<s:Image width="24" height="24" smooth="false" smoothingQuality="high"
+								 source="@Embed('assets/images/tools/tool_grid.png')"/>
+					</s:BorderContainer>
+				</s:BorderContainer>
+				<s:BorderContainer width="38" height="102" backgroundColor="#FFFFFF"
+								   borderColor="#777777" dropShadowVisible="false">
+					<s:layout>
+						<s:VerticalLayout gap="8" horizontalAlign="center" paddingTop="8"/>
+					</s:layout>
+					
+					<components:fillColorCheckbox></components:fillColorCheckbox>
+					<components:lineColorCheckbox></components:lineColorCheckbox>
+					
+					<s:Image width="24" height="24" smooth="false" smoothingQuality="high"
+							 source="@Embed('assets/images/tools/tool_lineWidth.png')"/>
+				</s:BorderContainer>
+				<s:BorderContainer width="38" height="42" backgroundColor="#FFFFFF"
+								   borderColor="#777777" dropShadowVisible="false">
+					<s:layout>
+						<s:VerticalLayout gap="8" horizontalAlign="center" paddingTop="8"/>
+					</s:layout>
+					<s:Image x="9" y="5" width="24" height="24" smooth="false"
+							 smoothingQuality="high"
+							 source="@Embed('assets/images/tools/tool_upload.png')"/>
+				</s:BorderContainer>
+			</s:SkinnableContainer>
+			<s:BorderContainer id="body" width="100%" height="100%" borderColor="#777777"
+							   borderWeight="1" chromeColor="#696969" dropShadowVisible="false"
+							   >
+				<components:Canvas x="0" y="0" width="100%" height="100%" id="canvas"/>
+			</s:BorderContainer>
+			<s:SkinnableContainer width="240" height="100%">
+				<s:layout>
+					<s:VerticalLayout horizontalAlign="center"/>
+				</s:layout>
+				<s:BorderContainer x="4" y="0" width="229" height="240" backgroundColor="#FFFFFF"
+								   borderColor="#777777" dropShadowVisible="false">
+					<s:layout>
+						<s:VerticalLayout gap="0" horizontalAlign="center" paddingTop="2"/>
+					</s:layout>
+					<s:VGroup width="100%" height="100%" gap="0" horizontalAlign="center"
+							  paddingBottom="1" paddingTop="1" verticalAlign="top">
+						<s:Group>
+							<s:VideoDisplay width="220" height="164" autoPlay="false" scaleMode="zoom"
+											source="assets/videos/sample/trailer.flv"/>
+							<s:HGroup width="100%" height="20" gap="15" horizontalAlign="right"
+									  paddingRight="10" y="140">
+								<s:CheckBox id="chk_sendVideo" label="Video" color="#FFFFFF"/>
+							</s:HGroup>
+						</s:Group>
+						<s:HGroup id="zzz" width="100%" height="100%" gap="6"
+								  horizontalAlign="center" verticalAlign="middle">
+							<s:BorderContainer width="67" height="51" backgroundColor="#FFFFFF"
+											   borderColor="#999999" borderVisible="false"
+											   borderWeight="1" dropShadowVisible="false">
+								<s:layout>
+									<s:TileLayout columnWidth="67" horizontalAlign="center"
+												  rowHeight="51" verticalAlign="middle"/>
+								</s:layout>
+								<s:Image x="21" y="10" source="assets/images/icons/sw.jpeg" id="btn_stewie"/>
+							</s:BorderContainer>
+							<s:BorderContainer width="67" height="51" backgroundColor="#FFFFFF"
+											   borderColor="#999999" borderVisible="true"
+											   borderWeight="1" dropShadowVisible="false">
+								<s:layout>
+									<s:TileLayout columnWidth="67" horizontalAlign="center"
+												  rowHeight="51" verticalAlign="middle"/>
+								</s:layout>
+								<s:Image x="19" y="11" source="assets/images/icons/XWnPVVEBaqJtvvI3-s-.png" click="getPDF();" />
+							</s:BorderContainer>
+							<s:BorderContainer width="67" height="51" backgroundColor="#EAEAEA"
+											   borderColor="#999999" borderWeight="1"
+											   dropShadowVisible="false">
+								<s:layout>
+									<s:TileLayout columnWidth="67" horizontalAlign="center"
+												  rowHeight="51" verticalAlign="middle"/>
+								</s:layout>
+								<s:Image source="assets/images/icons/hd-video-conferencing.jpg" click="addPDF();"/>
+							</s:BorderContainer>
+						</s:HGroup>
+					</s:VGroup>
+				</s:BorderContainer>
+				<s:TabBar id="tabs"  dataProvider="{vs}"  skinClass="org.chineseforall.skins.chatRoomListTab"
+						  width="229"/>
+				<mx:ViewStack id="vs"  left="8" y="23" width="229" height="100%">
+					<s:NavigatorContent label="Chat"  width="100%" height="100%">
+						<s:BorderContainer width="100%" height="100%">
+							<s:layout>
+								<s:VerticalLayout gap="2" horizontalAlign="center" paddingTop="1" paddingBottom="2"/>
+							</s:layout>
+							
+							<s:Scroller width="100%" height="90%" id="chatBoxScroller">
+								<s:RichEditableText id="txt_chatBox" editable="false" paddingBottom="8"
+													paddingLeft="8" paddingRight="8" paddingTop="8"
+													selectable="true" fontSize="14">
+								</s:RichEditableText>
+							</s:Scroller>
+							<s:HGroup width="98%" height="23" gap="3" textAlign="center"
+									  verticalAlign="middle" paddingBottom="1">
+								<s:TextInput id="chat_txt" width="100%" height="22" borderColor="#999999"
+											 textAlign="left"/>
+								<s:Image id="btn_sendtxt" click="sendText();"
+										 source="assets/images/buttons/btn_send.png"/>
+							</s:HGroup>	
+						</s:BorderContainer>
+					</s:NavigatorContent>
+					<s:NavigatorContent label="Room List"  width="100%" height="100%">
+						<s:BorderContainer width="100%" height="100%">
+							<s:layout>
+								<s:VerticalLayout gap="2" horizontalAlign="center" paddingTop="1"/>
+							</s:layout>
+							
+							<s:List id="room_list" width="100%" height="100%" borderColor="#FFFFFF"
+									borderVisible="false" color="#335DDE" dataProvider="{roomListArray}"
+									textAlign="left" itemRenderer="org.chineseforall.itemRenders.StarredItemRenderer2"
+									fontSize="12">
+								<s:layout>
+									<s:VerticalLayout gap="1" paddingBottom="2" paddingLeft="3"
+													  paddingRight="2" paddingTop="2"/>
+								</s:layout>
+							</s:List>
+							
+						</s:BorderContainer>
+					</s:NavigatorContent>
+				</mx:ViewStack>
+				<s:BorderContainer width="229" height="150" backgroundColor="#FFFFFF"
+								   borderColor="#777777" dropShadowVisible="false">
+					<s:layout>
+						<s:VerticalLayout gap="0" horizontalAlign="center" paddingTop="1"/>
+					</s:layout>
+					<s:VGroup x="0" y="0" width="100%" height="100%" contentBackgroundColor="#FFFFFF"
+							  gap="4" paddingBottom="2" paddingLeft="6" paddingRight="0"
+							  paddingTop="10">
+						<s:HGroup verticalAlign="middle">
+							<s:Label color="#7A7A7A" fontFamily="HelveticaNeueLTStd-Bd"
+									 fontLookup="embeddedCFF" fontSize="12" paddingTop="4"
+									 text="UPLOADED FILES"/>
+							<s:Image source="assets/images/buttons/settings_icon.png" id="btn_settings"/>
+							
+						</s:HGroup>
+						<s:List id="file_list" width="100%" height="100%" borderColor="#FFFFFF"
+								borderVisible="false" color="#335DDE" dataProvider="{fileListArray}"
+								textAlign="left" itemRenderer="org.chineseforall.itemRenders.StarredItemRenderer"
+								fontSize="12">
+							<s:layout>
+								<s:VerticalLayout gap="1" paddingBottom="2" paddingLeft="0"
+												  paddingRight="2" paddingTop="2"/>
+							</s:layout>
+						</s:List>
+					</s:VGroup>
+				</s:BorderContainer>
+			</s:SkinnableContainer>
+		</s:Group>
+	</s:VGroup>
+</s:Application>

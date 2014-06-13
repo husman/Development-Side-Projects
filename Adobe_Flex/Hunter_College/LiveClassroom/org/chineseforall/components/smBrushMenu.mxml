@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   width="118" height="60" borderAlpha="0.9" borderColor="#FFAA16" cornerRadius="8"
+				   dropShadowVisible="true">
+	<s:layout>
+		<s:TileLayout columnWidth="118" horizontalAlign="center" horizontalGap="0" orientation="rows"
+					  requestedColumnCount="1" requestedRowCount="1" rowHeight="60"
+					  verticalAlign="middle" verticalGap="0"/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:VGroup x="96" y="53" width="100" height="52" gap="3">
+		<s:HGroup id="tool_brushes_paintbrush" width="100%" height="24" gap="6" textAlign="left"
+				  verticalAlign="middle"
+				  rollOver="tool_brushes_paintbrush_label.styleName = 'lblToolTextHover';"
+				  rollOut="tool_brushes_paintbrush_label.styleName = 'lblToolText';">
+			<s:Image id="tool_brushes_paintbrush_bullet" source="@Embed('assets/images/tools/selections/sel_bullet.png')"/>
+			<s:Image source="@Embed('assets/images/tools/selections/sel_brushPaint.png')"/>
+			<s:Label id="tool_brushes_paintbrush_label" styleName="lblToolText" text="Paintbrush"/>
+		</s:HGroup>
+		<s:HGroup id="tool_brushes_highlighter" width="100%" height="24" verticalAlign="middle"
+				  rollOver="tool_brushes_highlighter_label.styleName = 'lblToolTextHover';"
+				  rollOut="tool_brushes_highlighter_label.styleName = 'lblToolText';">
+			<s:Image source="@Embed('assets/images/tools/selections/sel_bullet.png')"
+					 id="tool_brushes_highlighter_bullet" visible="false" />
+			<s:Image source="@Embed('assets/images/tools/selections/sel_brushHighlighter.png')"/>
+			<s:Label id="tool_brushes_highlighter_label" styleName="lblToolText" text="Highlighter"/>
+		</s:HGroup>
+	</s:VGroup>
+	
+</s:BorderContainer>

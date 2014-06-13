@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	<fx:Script>
+		<![CDATA[
+
+		]]>
+	</fx:Script>
+	<s:VGroup bottom="5">
+		<mx:HRule width="100%" height="1" strokeColor="#ececec"/>
+	<s:HGroup gap="6" paddingLeft="2" paddingRight="2" paddingTop="2"
+			  paddingBottom="2" verticalAlign="middle">
+		<!--<s:BitmapImage id="star" source="{data.icon}" visible="true" />-->
+		<s:Label text="{data.label}" maxDisplayedLines="1" width="210"  fontSize="12"
+				 color="{mx.core.Singleton.getInstance('mx.styles::IStyleManager2').getColorName(data.color)}"/>
+		<s:Label text="{data.size}" maxDisplayedLines="1" fontSize="12"
+				 width="75" textAlign="center" color="#898989"/>
+		<s:Label text="{data.date}" maxDisplayedLines="1" fontSize="12"
+				 width="115" textAlign="center" color="#898989"/>
+		<s:Image source="assets/images/buttons/download_btn.png"/>
+	</s:HGroup>
+	</s:VGroup>
+	
+</s:ItemRenderer>

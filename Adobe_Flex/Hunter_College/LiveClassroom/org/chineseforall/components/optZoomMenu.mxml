@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+					  xmlns:s="library://ns.adobe.com/flex/spark"
+					  xmlns:mx="library://ns.adobe.com/flex/mx"
+					  width="269" height="150" backgroundAlpha="1.0" backgroundColor="#EEEEEE"
+					  chromeColor="#F5F5F5" skinClass="org.chineseforall.skins.DropShadowBorderSkin"
+					  symbolColor="#777777">
+	<s:layout>
+		<s:TileLayout columnWidth="269" horizontalAlign="center" horizontalGap="0"
+					  requestedColumnCount="1" requestedRowCount="1" rowHeight="150"
+					  verticalAlign="middle" verticalGap="0"/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.core.Application;
+			import mx.core.FlexGlobals;
+			[Bindable] private var app:Object = FlexGlobals.topLevelApplication;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer width="266" height="303" backgroundAlpha="1.0" backgroundColor="#F4F4F4"
+					   borderAlpha="0.9" borderColor="#FFFFFF" borderWeight="2" cornerRadius="6"
+					   dropShadowVisible="false">
+		<s:layout>
+			<s:TileLayout columnWidth="266" horizontalAlign="center" rowHeight="303"
+						  verticalAlign="middle"/>
+		</s:layout>
+		<s:VGroup x="96" y="53" width="241" height="293" gap="15" horizontalAlign="center">
+			<s:HGroup width="100%" gap="6" paddingTop="8" textAlign="left" verticalAlign="middle">
+				<s:Label width="100%" color="#444444" fontFamily="HelveticaNeueLTStd-Bd"
+						 fontLookup="embeddedCFF" fontSize="12" paddingLeft="34" text="ZOOM OPTIONS"
+						 textAlign="center"/>
+				<s:BorderContainer id="tool_zoom_opt_close" width="18" height="18"
+								   backgroundColor="#F4F4F4" borderColor="#F2F2F2" cornerRadius="6"
+								   dropShadowVisible="false" styleName="toolBorder" useHandCursor="true" buttonMode="true">
+					<s:layout>
+						<s:TileLayout columnWidth="18" horizontalAlign="center" horizontalGap="0"
+									  rowHeight="18" verticalAlign="middle" verticalGap="0"/>
+					</s:layout>
+					<s:Label color="#939393" fontSize="10" fontWeight="bold"
+							 text="X"/>
+				</s:BorderContainer>
+			</s:HGroup>
+			<s:HGroup width="100%" verticalAlign="middle">
+				<s:Label color="#444444" fontFamily="HelveticaNeueLTStd-Roman"
+						 fontLookup="embeddedCFF" fontSize="12" text="Zoom Size"/>
+			</s:HGroup>
+			<s:HGroup width="100%" gap="6" verticalAlign="middle">
+				<s:Label id="tool_zoom_opt_minus" color="#8fbc32" fontFamily="HelveticaNeueLTStd-Bd"
+						 fontLookup="embeddedCFF" fontSize="16" text="-" buttonMode="true" useHandCursor="true"/>
+				<s:HSlider id="tool_zoom_opt_size" width="100%" chromeColor="#FFFFFF" maximum="100"
+						   minimum="0.0" showDataTip="false"
+						   skinClass="org.chineseforall.skins.HSliderSkin" stepSize="1.0" value="33"/>
+				<s:Label id="tool_zoom_opt_plus" color="#8fbc32" fontFamily="HelveticaNeueLTStd-Bd"
+						 fontLookup="embeddedCFF" fontSize="16" text="+" buttonMode="true" useHandCursor="true"/>
+			</s:HGroup>
+			<s:HGroup width="100%" gap="10" horizontalAlign="right" paddingTop="10"
+					  verticalAlign="middle">
+				<s:Image id="tool_zoom_opt_submit" source="assets/images/tools/options/btn_submit.png"
+						 useHandCursor="true" buttonMode="true"/>
+			</s:HGroup>
+		</s:VGroup>
+	</s:BorderContainer>
+	
+</s:SkinnableContainer>

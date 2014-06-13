@@ -1,0 +1,5 @@
+Experimental program: media_file_streamer.c:
+	This program uses FFMPEG and oRTP to stream the selected file to a server. 
+	The server used in this case is Flash Media Server.
+
+		

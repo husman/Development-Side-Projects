@@ -1,0 +1,13 @@
+I started this project while working for the Hunter College, Research Foundation of CUNY.
+This is an application used daily by multiple tutors, teachers, and students to teacher/learn.
+
+I was also working on a full LAMP Stack Course Management System at the same time and spent
+most of my time working on the Course Management System. This application took me about 3 
+and a half weeks to develop. The application began to incorporate several hacks that were
+applied during Hot Patches :(.
+
+Files I Wrote:
+	+ LiveClassroom.mxml
+	+ org (everything in this directory)
+	
+This application was integrated with the Course Management System through PHP.

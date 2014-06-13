@@ -1,0 +1,11 @@
+Experimental program: windows_desktop_streamer.c:
+	This program uses FFMPEG and oRTP to stream your desktop to a server. The server used in this case
+	is Flash Media Server.
+
+Experimental Project:
+	- Screen_Capture 
+		Windows OS Only - Captures your screen and encodes/saves it as BMP. This was the experiment
+		performed before moving to the live desktop streaming concept.
+		
+
+		

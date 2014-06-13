@@ -1,0 +1,15 @@
+Experimental Projects:
+	- P2P_Live_Streaming 
+		Something I began working on for fun when I became interested in the P2P
+		Technology Adobe introduced into the Flash Media Server. I did some research
+		into Skype as well and here is a quick project I put together while experimenting.
+		
+	- P2P_Simple_Speex 
+		After receiving some complaints about delay in a Live Classroom application I created,
+		I became more interested in Speex, which was the audio encoder used by my Flex Application.
+		
+	- PixieHD
+		While working on a gaming website with a few friends, I became interested in streaming
+		my games live. This led me to the FFMPEG group and multiple other interesting video/audio
+		groups. These are some of the experimental programs I created while investigating the concept.
+		

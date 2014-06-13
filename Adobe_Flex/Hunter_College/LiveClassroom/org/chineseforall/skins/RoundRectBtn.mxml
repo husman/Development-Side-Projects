@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkButtonSkin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+             xmlns:s="library://ns.adobe.com/flex/spark" 
+             xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+             minWidth="21" minHeight="9" 
+             alpha.disabled="0.5">
+     
+    <fx:Metadata>
+        <![CDATA[ 
+        /** 
+         * @copy spark.skins.spark.ApplicationSkin#hostComponent
+         */
+        [HostComponent("spark.components.Button")]
+        ]]>
+    </fx:Metadata>
+	
+	<fx:Script fb:purpose="styling">
+		<![CDATA[
+			/*public function set label(value:String):void
+			{
+				
+			}*/
+		]]>
+	</fx:Script>
+    
+    <!-- states -->
+    <s:states>
+        <s:State name="up" />
+        <s:State name="over" />
+        <s:State name="down" />
+        <s:State name="disabled" />
+    </s:states>
+ 
+	<s:VGroup width.disabled="100%" horizontalAlign.disabled="center"
+			  width.down="100%" horizontalAlign.down="center"
+			  width.over="100%" horizontalAlign.over="center"
+			  width.up="100%" horizontalAlign.up="center">
+	<s:BorderContainer id="background"
+					   alpha="0.8" minHeight="9"
+					   height="19" width="19" cornerRadius="11"
+					   borderColor="0xcacaca">
+		<s:Rect width="100%" height="100%" radiusX="11" radiusY="11">
+			<s:fill>
+
+				<s:RadialGradient>
+					<s:GradientEntry color="0xffffff" />
+					<s:GradientEntry color="0xd8d8d8"/>
+				</s:RadialGradient>
+			</s:fill>
+		</s:Rect>
+	</s:BorderContainer>
+    
+	<s:Label id="labelDisplay" top="25"
+			 color="#8fbc32" fontSize="13"
+			 fontLookup="embeddedCFF" fontFamily="HelveticaNeueLTStd-Bd"/>
+	</s:VGroup>
+	
+</s:SparkButtonSkin>

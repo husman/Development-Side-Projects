@@ -1,0 +1,6 @@
+Experimental program: paex_speex_net_ortp.cpp:
+	I became very interested in P2P live streaming when Adobe introduced P2P support
+	for the Flash Media Server. I did some research and hit upon the concept of a 
+	STUN server. This led me to several. Re-using the concepts I have learned from
+	previous experiments, I went on a journey to write my first STUN Based P2P
+	streaming application. It was a success and I build a GUI for it using GTK+

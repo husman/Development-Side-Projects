@@ -1,0 +1,67 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+
+
+s|Label.lbz1
+{
+	color: #FF0000;
+	font-family: Arial;
+	font-size: 36;
+	font-weight: bold;
+	background-color: #999;
+	verticalAlign: middle;
+	textAlign: center;
+}
+
+s|SkinnableContainer.top_panel {
+	
+}
+
+@font-face {
+	src: url("assets/fonts/HelveticaNeueLTStd-Roman.otf");
+	fontFamily: "HelveticaNeueLTStd-Roman";
+	embedAsCFF: true;
+}
+
+@font-face {
+	src: url("assets/fonts/HelveticaNeueLTStd-Bd.otf");
+	fontFamily: "HelveticaNeueLTStd-Bd";
+	embedAsCFF: true;
+}
+
+s|RichEditableText#txt_chatBox {
+	fontFamily: HelveticaNeueLTStd-Roman;
+	fontLookup: embeddedCFF;
+	fontSize: 14px;
+	color: #444444;
+}
+
+s|Label.lblToolText {
+	fontFamily: HelveticaNeueLTStd-Roman;
+	fontLookup: embeddedCFF;
+	fontSize: 12px;
+	color: #4d4d4d;
+}
+
+s|Label.lblToolTextHover {
+	fontFamily: HelveticaNeueLTStd-Roman;
+	fontLookup: embeddedCFF;
+	fontSize: 12px;
+	color: #2269c0;
+}
+
+s|BorderContainer.toolBorder {
+	borderColor: #c1c1c1;
+}
+
+s|BorderContainer.toolBorderActive {
+	/*borderColor: #83b61a;*/
+	borderColor:#4ca716;
+}
+
+
+global
+{
+}

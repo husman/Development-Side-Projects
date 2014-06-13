@@ -1,0 +1,18 @@
+Experimental Projects:
+	- Aries 
+		This is a demostration I have wrote up for Dmitry @ Adobe/Behance. The back-end is served by a very light custom MVC framework build on top of Codeigniter. 
+		Because this is a demostration, I have attempted to convey as much detail about my coding style and general thinking. 
+		Therefore, the framework is very light weight but it touches on some important features including: 
+		Autoloading (utilized a Registry method from Codeigniter), Routing, Database abstraction (MySQL and Oracle 11 XE) , 
+		Controllers, Views, and Configuration for different Development Environments.
+
+		I like to separate the layers of my application as much as possible and break the components of my application/software into front-end and back-end components. 
+		The front-end (HTML, JavaScript, and CSS) has follows the same Design Pattern as the back-end (PHP). The front-end achieves MVC through the help of AngularJS. 
+		Though I have not done anythng with the front-end data to persist it with the back-end for this demostration.
+
+
+EXAMPLE:
+---------
+
+2: (back-end/Front-end MVC framework Utilization): http://dev.chineseforall.org/sample/index.php?controller=assessment&action=add
+		

@@ -1,0 +1,9 @@
+Experimental Projects:
+	- Desktop_Streamer 
+		Windows OS Only - Captures your screen and encodes/saves it as BMP or streams it to a server.
+		The media server used for this experiment was Flash Media Server.
+		
+	- File_Streamer 
+		Select a file from your computer (such as MP4) and you can stream it live to a server.
+		The media server used for this experiment was Flash Media Server.
+		

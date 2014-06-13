@@ -1,0 +1,101 @@
+<div class="accordion-group" data-ng-class="{active: sectionData.collapsed, last: sectionClass}">
+	<div class="accordion-heading">
+		<a class="accordion-toggle left" data-toggle="collapse"
+			data-parent="#accordion_main" href="#collapse{{ sectionData.num  }}"
+			data-ng-click="collapseAll(this); sectionData.collapsed = !sectionData.collapsed;">Section 
+			{{ sectionData.num+1 }}:</a> 
+			<div class="left" style="margin: 10px 30px 0px; font-size: 12px;">
+				<strong>Total Questions:</strong> {{getSectionTotalQuestions()}}
+			</div>
+			<div class="left" style="margin: 10px 30px 0px; font-size: 12px;">
+				<strong>Total Points:</strong> {{getSectionTotalPoints()}}
+			</div>
+			<div class="left questionTypeLabel" data-ng-class="sectionData.questionTypeClass">{{ sectionData.type }}</div>
+			<a class="removeSectionBtn right" href="javascript:void(0);" style="margin: 8px 0px 0px;">
+				<img src="/app/frontend/images/buttons/trashBtn.png" alt="Delete" width="28" height="27" />
+			</a>
+			<a class="editSectionBtn right" href="javascript:void(0);" style="margin: 8px 6px 0px;"
+			   data-ng-class="{active: sectionData.editMode}" data-ng-click="sectionData.editMode = true">&#32;</a>
+			
+			<a href="javascript:void(0);" class="right" data-ng-click="addQuestion(sectionData.type)"
+			   style="margin: 8px 6px 0px;">
+				<img src="/app/frontend/images/buttons/addQuestionIconBtn2_03.png" width="28" height="28" />
+			</a>
+			<!--<div class="btn-group right addSectionQuestionBtn" style="margin-right: 5px;">
+			    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle"></button>
+			    <ul class="dropdown-menu">
+			    	<li><a class="title">Select Question Type</a></li>
+			    	<li class="divider"></li>
+			    	<li><a href="javascript:void(0);" title="Multiple Choice"
+			    		   data-ng-click="addQuestion('Multiple Choice')">&gt; Multiple Choice</a></li>
+			    	<li><a href="javascript:void(0);" title="Fill in the Blanks"
+			    		   data-ng-click="addQuestion('Fill in the Blanks')">&gt; Fill in the Blanks</a></li>
+					<li><a href="javascript:void(0);" title="Matching"
+						   data-ng-click="addQuestion('Matching')">&gt; Matching</a></li>
+					<li><a href="javascript:void(0);" title="Writing">&gt; Writing</a></li>
+					<li><a href="javascript:void(0);" title="Listening">&gt; Listening</a></li>
+					<li><a href="javascript:void(0);" title="Scrambled Words/Sentences">&gt; Scrambled Words/Sentences</a></li>
+					<li><a href="javascript:void(0);" title="True or False">&gt; True or False</a></li>
+					<li><a href="javascript:void(0);" title="Speaking">&gt; Speaking</a></li>
+				</ul>
+			</div>-->
+		<div class="clear"></div>
+	</div>
+	<div id="collapse{{ sectionData.num }}" class="accordion-body in collapse">
+		<div class="accordion-inner">
+			<div class="sReqs">
+				<div class="sWrap">
+					<table cellspacing="5" cellpading="5" class="assessmentTable"
+						   data-ng-show="!sectionData.editMode">
+						<tr>
+							<td class="titleLabel">Section Title</td>
+							<td data-ng-bind="sectionData.title"></td>
+						</tr>
+						<tr>
+							<td class="titleLabel">Instructions</td>
+							<td data-ng-bind="sectionData.description"></td>
+						</tr>
+					</table>
+					<table cellspacing="5" cellpading="5" class="assessmentTable" 
+						   data-ng-show="sectionData.editMode">
+						<tr>
+							<td class="titleLabel">Section Title</td>
+							<td><input type="text" class="widefield sTitle"
+									   data-ng-model="sectionData.title" /></td>
+						</tr>
+						<tr>
+							<td class="titleLabel">Instructions</td>
+							<td><textarea class="widefield sDesc"
+										  data-ng-model="sectionData.description"></textarea></td>
+						</tr>
+						<tr>
+							<td class="titleLabel"></td>
+							<td>
+							<br />
+							<a href="javaScript:void(0);" class="btn-done"
+								   data-ng-click="sectionData.editMode = false">Save</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<div class="sQuestionBox">
+				<!-- Load section questions -->
+				<div data-ng-repeat="question in sectionData.questions">
+					<!-- What kind of question do we have? -->
+					<div data-ng-switch data-on="question.type">
+						<div data-ng-switch-when="multipleChoice">
+							<div data-multiple-Choice="question" data-last="$last"></div>
+						</div>
+						<div data-ng-switch-when="fillInTheBlanks">
+							<div data-fill-In-The-Blanks="question" data-last="$last"></div>
+						</div>
+						<div data-ng-switch-when="matching">
+							<div data-matching="question" data-last="$last"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
