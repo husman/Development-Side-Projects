@@ -1,0 +1,1 @@
+This project contains a streaming server to serve as a backend for a p2p based conferencing front-end. It is still in its early stages. The server directory contains the partially implemented streaming server and the clients directory contains some sample live streamers.
